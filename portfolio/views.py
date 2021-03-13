@@ -136,3 +136,33 @@ def getStock(request, pk):
     elif request.method == 'DELETE':
         stock.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+@api_view(['GET'])
+def getStockByCust(request, pk):
+    try:
+        stock = Stock.objects.filter(customer_id=pk)
+        print(stock)
+    except Stock.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    if request.method == 'GET':
+        serializer = StockSerializer(stock,context={'request': request}, many=True)
+        print(serializer.data)
+        return Response({'data': serializer.data})
+
+
+@api_view(['GET'])
+def getInvestmentByCust(request, pk):
+    """
+    Retrieve, update or delete a customer instance.
+    """
+    try:
+        investment = Investment.objects.filter(customer_id=pk)
+        print(investment)
+    except Stock.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    if request.method == 'GET':
+        serializer = InvestmentSerializer(investment,context={'request': request}, many=True)
+        print(serializer.data)
+        return Response({'data': serializer.data})
+
+
