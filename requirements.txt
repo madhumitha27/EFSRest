@@ -7,3 +7,4 @@ djangorestframework-jwt==1.11.0
 PyJWT==1.7.1
 pytz==2020.1
 django-heroku
+psycopg2==2.8.6

@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django_filters',
     'corsheaders',
     'portfolio',
+    'django.contrib.postgres'
 ]
 
 MIDDLEWARE = [
