@@ -138,7 +138,7 @@ def getStock(request, pk):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 @api_view(['GET'])
-def getStockByCust(request, pk):
+def getStockByCustId(request, pk):
     try:
         stock = Stock.objects.filter(customer_id=pk)
         print(stock)
@@ -151,7 +151,7 @@ def getStockByCust(request, pk):
 
 
 @api_view(['GET'])
-def getInvestmentByCust(request, pk):
+def getInvestmentByCustId(request, pk):
     """
     Retrieve, update or delete a customer instance.
     """
