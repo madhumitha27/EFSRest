@@ -76,9 +76,8 @@ class Stock(models.Model):
 
 class MutualFund(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='funds')
-    category = models.CharField(max_length=50)
-    name = models.CharField(max_length=50)
-    shares = models.DecimalField (max_digits=10, decimal_places=1)
+    symbol = models.CharField(max_length=50)
+    description = models.CharField(max_length=50)
     purchase_price = models.DecimalField(max_digits=10, decimal_places=2)
     purchase_date = models.DateField(default=timezone.now, blank=True, null=True)
     recent_value = models.DecimalField(max_digits=10, decimal_places=2)

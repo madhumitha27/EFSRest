@@ -23,9 +23,9 @@ class StockList(admin.ModelAdmin):
     ordering = ['customer']
 
 class MutualFundList(admin.ModelAdmin):
-    list_display = ('customer','category','name', 'purchase_price','recent_value')
-    list_filter = ('customer','name')
-    search_fields = ('customer','name')
+    list_display = ('customer','symbol','description', 'purchase_price','recent_value')
+    list_filter = ('customer','symbol')
+    search_fields = ('customer','symbol')
     ordering = ['customer']
 
 admin.site.register(Customer, CustomerList)

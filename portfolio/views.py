@@ -1,11 +1,12 @@
-from rest_framework import status
-from rest_framework.decorators import api_view
+from django.contrib.auth.models import Group
+from rest_framework import status, generics
+from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from django.views.decorators.csrf import csrf_exempt
 
 from .models import MutualFund
 from .serializers import *
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly, AllowAny
 
 
 @csrf_exempt
@@ -23,8 +24,6 @@ def customer_list(request):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
 
 @api_view(['GET', 'PUT', 'DELETE'])
 def getCustomer(request, pk):
@@ -208,3 +207,8 @@ def getMutualFunds(request, pk):
     elif request.method == 'DELETE':
         fund.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+class RegisterView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    permission_classes = (AllowAny,)
+    serializer_class = RegisterSerializer
